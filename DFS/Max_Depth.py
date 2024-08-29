@@ -7,8 +7,10 @@ class Node:
 
 def Tree_Max_Depth(root: Node) -> int:
     def dfs(root):
+        # If root is null return 0; null node adds no depth
         if not root:
             return 0
+        # num nodes in the longest path of current subtree = max num nodes of its two subtrees + 1 current node
         return max(dfs(root.left), dfs(root.right)) + 1
 
     return dfs(root) - 1 if root else 0
@@ -18,7 +20,8 @@ def Tree_Max_Depth(root: Node) -> int:
 
 def build_tree(nodes, f):
     val = next(nodes)
-    if val == 'x': return None
+    if val == 'x':
+        return None
     left = build_tree(nodes, f)
     right = build_tree(nodes, f)
     return Node(f(val), left, right)

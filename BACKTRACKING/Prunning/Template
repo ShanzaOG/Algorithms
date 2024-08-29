@@ -1,0 +1,22 @@
+ans = []
+def dfs(start_index, path, [...additional states]):
+    if is_leaf(start_index):
+        ans.append(path[:]) # add a copy of the path to the result
+        return
+    for edge in get_edges(start_index, [...additional states]):
+        # prune if needed
+        if not is_valid(edge):
+            continue
+        path.add(edge)
+        if additional states:
+            update(...additional states)
+        dfs(start_index + len(edge), path, [...additional states])
+        # revert(...additional states) if necessary e.g. permutations
+        path.pop()
+
+
+            is_leaf: when start_index reaches the size of the input string, we have reached a leaf (solution).
+            get_edges: the possible next prefixes (obtained by substring start to end)
+            is_valid: the prefix must be a palindrome.
+            increment start_index by the size of the prefix.
+

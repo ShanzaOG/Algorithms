@@ -1,10 +1,20 @@
 # Binary Search
+"""
+Time Complexity -> Log(n)
+"""
 
-class Binary_search:
+
+class Solution:
     def __init__(self):
         self.items = []
 
     def binary_search(self, target, sorted_list):
+        """
+
+        :param target: integer Value
+        :param sorted_list: List[int]
+        :return: int -> index of the target value
+        """
         low = 0
         high = len(sorted_list) - 1
 
@@ -18,3 +28,4 @@ class Binary_search:
                 low = mid + 1
             else:
                 high = mid - 1
+        return -1
