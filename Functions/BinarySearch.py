@@ -29,3 +29,9 @@ class Solution:
             else:
                 high = mid - 1
         return -1
+
+
+if __name__ == '__main__':
+    obj = Solution()
+    result = obj.binary_search(4,[-1,0,2,4,6,8])
+    print(result)

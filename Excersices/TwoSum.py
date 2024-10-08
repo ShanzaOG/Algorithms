@@ -11,7 +11,7 @@ Return the answer with the smaller index first.
 from typing import List
 
 
-def twoSum(nums: List[int], target: int) -> List[int]:
+def twoSum_easy(nums: List[int], target: int) -> List[int]:
     left = 0
     right = len(nums) - 1
 
@@ -31,6 +31,17 @@ def twoSum(nums: List[int], target: int) -> List[int]:
     return []
 
 
+def twoSum(nums: List[int], target: int) -> List[int]:
+    num_map={}
+
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    return []
+
+
 if __name__ == '__main__':
-    result = twoSum([3,4,5,6],7)
+    result = twoSum([3, 4, 5, 6], 7)
     print(result)
