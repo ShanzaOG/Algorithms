@@ -22,7 +22,7 @@ def twoSum_easy(nums: List[int], target: int) -> List[int]:
     while left < right:
         current_sum = nums[left] + nums[right]
         if current_sum == target:
-            return [left,right]
+            return [left, right]
 
         if current_sum < target:
             left += 1
@@ -32,11 +32,12 @@ def twoSum_easy(nums: List[int], target: int) -> List[int]:
 
 
 def twoSum(nums: List[int], target: int) -> List[int]:
-    num_map={}
+    num_map = {}
 
     for i, num in enumerate(nums):
         complement = target - num
         if complement in num_map:
+            print(num_map[complement],i)
             return [num_map[complement], i]
         num_map[num] = i
     return []

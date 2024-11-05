@@ -1,35 +1,43 @@
 from typing import List
-"""
-Given [1,2,3,4,4] ans = True
-Given [1,2,3,4,5] ans = False
-"""
+from collections import deque
 
-def find_duplicate(nums: List[int]) -> int:
-    ans = False
-    for x in range(len(nums) - 1):
-        if nums[x] == nums[x+1]:
-            ans = True
-            break
-    return ans
 
-def isAnagram(s: str, t: str) -> bool:
-    ans = False
-    str1_list = sorted([x for x in s])
-    str2_list = sorted([x for x in t])
-    # Print sorted lists (for debugging)
-    print("Sorted s:", str1_list)
-    print("Sorted t:", str2_list)
+class Node:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
-    # Check if lengths are different
-    if len(s) != len(t):
-        return False
 
-    if str1_list == str2_list:
-        ans = True
-    return ans
+def level_order_traversal(root: Node) -> List[List[int]]:
+    # WRITE YOUR BRILLIANT CODE HERE
+    res = []
+    queue = deque([root])  # at least one element in the queue
+    while len(queue) > 0:  # As long as there are elements in the queue
+        n = len(queue)  # Number of nodes in the current level
+        new_level = []
+        for _ in range(n):
+            node = queue.popleft()
+            new_level.append(node.val)
+            for child in [node.left, node.right]:
+                if child is not None:
+                    queue.append(child)
+        res.append(new_level)
+    return res
+
+
+# this function builds a tree from input; you don't have to modify it
+# learn more about how trees are encoded in https://algo.monster/problems/serializing_tree
+def build_tree(nodes, f):
+    val = next(nodes)
+    if val == 'x': return None
+    left = build_tree(nodes, f)
+    right = build_tree(nodes, f)
+    return Node(f(val), left, right)
+
 
 if __name__ == '__main__':
-    #arr = [int(x) for x in input().split()]
-    #res = find_duplicate(arr)
-    res = isAnagram("tar","rat")
-    print(res)
+    root = build_tree(iter(input().split()), int)
+    res = level_order_traversal(root)
+    for row in res:
+        print(' '.join(map(str, row)))
